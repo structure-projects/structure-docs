@@ -1,0 +1,19 @@
+{
+  "name": "structure-docs",
+  "version": "1.0.0",
+  "description": "Structure Docs 是 structure 开源社区的官方文档站点，基于 VitePress 构建，旨在为开发者和企业提供全面的生态规范、开源产品说明、集成与运维方案、行业技术栈和 AI 相关内容。",
+  "main": "index.js",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:serve": "vitepress serve docs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vitepress": "^1.6.3"
+  },
+  "type": "module"
+}
