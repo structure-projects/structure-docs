@@ -3,57 +3,93 @@ layout: home
 hero:
   name: Structure
   text: Structure 开发者社区
-  tagline: 生态规范 · 开源产品 · 集成方案 · 运维架构 · 行业技术栈 · AI 开源
+  tagline: 企业级开发生态 · 开源框架 · 运维工具 · 行业解决方案
   image:
     src: /logo.png
     alt: Structure Logo
   actions:
     - theme: brand
-      text: 快速体验
-      link: /guide
+      text: 快速开始
+      link: /quickstart
     - theme: alt
-      text: 文档指南
-      link: /guide
+      text: 核心产品
+      link: /products
     - theme: alt
       text: GitHub
       link: https://github.com/structure-projects
 
 features:
   - icon: ⚡️
-    title: What is Structure?
-    details: Structure 是一个面向开发者的开源社区和企业级开发生态规范，聚合了丰富的开源框架和行业解决方案，助力高效开发与协作。
-    link: /community
+    title: Structure Boot
+    details: 基于 Spring Boot 的快速开发框架，提供开箱即用的 Starter 组件，助力快速构建企业级应用。
+    link: /structure-boot
   - icon: 🚀
-    title: 快速体验
-    details: 通过 Structure Boot、Structure Cloud 等核心产品，快速搭建企业级应用，体验标准化开发流程。
+    title: Structure Cloud
+    details: 云原生微服务解决方案，支持容器化部署、服务治理、分布式事务等企业级能力。
+    link: /structure-cloud
+  - icon: 🛠️
+    title: somcli
+    details: 统一容器管理工具，整合 Docker、Kubernetes、Harbor 等技术，简化运维工作。
+    link: /ops-architecture
+  - icon: 🔐
+    title: Structure OAuth
+    details: 统一认证授权服务，基于 OAuth2 协议，提供安全可靠的身份管理能力。
     link: /products
-  - icon: ☁️
-    title: SaaS 体验
-    details: 在线体验 Structure SaaS 平台，零成本试用云原生开发与运维能力。
-    link: https://run.structured.cn
-  - icon: 🌐
-    title: GitHub
-    details: 查看源码、参与贡献，欢迎访问我们的 GitHub 仓库。
-    link: https://github.com/structure-projects/structure-docs
+  - icon: 📊
+    title: Structure Admin
+    details: 企业级后台管理系统，提供完整的权限管理、数据展示、业务操作能力。
+    link: /products
+  - icon: 🤖
+    title: 行业解决方案
+    details: 提供金融、电商、物流等行业的完整技术栈和最佳实践。
+    link: /industry-ai
 
 ---
 
-# Structure Docs
+# Structure 开发生态
 
-Structure Docs 是 structure 开源社区的官方文档站点，基于 VitePress 构建，旨在为开发者和企业提供全面的生态规范、开源产品说明、集成与运维方案、行业技术栈和 AI 相关内容。
+Structure 是一个面向企业级开发者的开源社区和技术生态，致力于提供标准化、高效的开发解决方案。
 
-## 社区介绍
+## 🎯 生态愿景
 
-Structure 是一个面向开发者的开源社区，致力于推动企业级开发的标准化与高效协作。
+- **标准化**: 统一的开发规范和项目结构
+- **高效性**: 开箱即用的组件，快速构建应用
+- **扩展性**: 模块化设计，灵活组合使用
+- **云原生**: 支持容器化、微服务、DevOps 全流程
 
-- **社区定位**：开放、协作、创新的开发者社区，聚合开源框架与行业解决方案
-- **社区目标**：推动结构化、标准化的企业级开发生态，促进技术交流与知识共享
-- **参与方式**：欢迎开发者、企业、开源爱好者加入，贡献代码、文档或分享经验，参与线上/线下技术交流活动
+## 📦 核心产品矩阵
 
-- 🌱 [开源社区与生态规范](/guide)
-- 🚀 [Structure Boot、Structure Cloud 等核心产品](/products)
-- 🔗 [行业集成与最佳实践](/products)
-- 🛠️ [运维架构与自动化方案](/ops-architecture)
-- 🤖 [AI 相关开源与应用](/industry-ai)
+| 产品 | 定位 | 技术栈 |
+|------|------|--------|
+| **Structure Boot** | 快速开发框架 | Java 8+, Spring Boot 2.7.x |
+| **Structure Cloud** | 微服务架构 | Spring Cloud, Kubernetes |
+| **Structure Admin** | 后台管理系统 | Java + Vue 3 |
+| **Structure OAuth** | 认证授权中心 | OAuth2, JWT |
+| **Structure Job** | 任务调度 | XXL-JOB |
+| **somcli** | 运维管理工具 | Go |
 
-> 欢迎访问各栏目了解详情，参与社区共建！ 
+## 🚀 快速开始
+
+```bash
+# 1. 创建 Spring Boot 项目
+# 2. 添加 Structure Boot 依赖
+# 3. 启用 Starter 组件
+# 4. 开始开发！
+
+@SpringBootApplication
+@EnableSimpleGlobalException
+public class Application {
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+}
+```
+
+## 🌱 社区生态
+
+- 📖 [文档中心](/guide) - 完整的使用文档和API参考
+- 🤝 [贡献指南](/guide) - 参与社区建设
+- 💬 [GitHub Issues](https://github.com/structure-projects/structure-docs/issues) - 问题反馈与讨论
+- 📧 邮箱: 361648887@qq.com
+
+> 欢迎加入 Structure 社区，一起构建更好的企业级开发生态！

@@ -9,6 +9,8 @@ pnpm-debug.log*
 dist/
 .vitepress/dist/
 .vitepress/cache/
+docs/.vitepress/dist
+docs/.vitepress/cache
 
 # Environment variables
 .env
