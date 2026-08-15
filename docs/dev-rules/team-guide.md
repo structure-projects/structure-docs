@@ -258,6 +258,12 @@ Feature,Hotfix ,Release分支属于临时分支，命名可参考如下示例
 
 ### 工程结构
 
+::: tip 新项目默认 DDD 7+1
+
+新业务中心默认采用 **DDD 7+1 多模块**结构（`domain` / `infra` / `repository-mybatis` 等），详见 [DDD 架构与模式](./ddd-architecture.md) 与 [项目创建与多模块](./project-scaffolding.md)。以下为单体兼容形态。
+
+:::
+
 ```
 structure-{项目名}/                        # 项目根目录
 ├── structure-{项目名}-api/                # 控制层（对外暴露 REST API）
@@ -295,7 +301,7 @@ resource
 
 ​	spring-boot 框架版本 4.0.6
 
-​	structure         框架版本 1.4.1-SNAPSHOT      框架说明： structure 是基于 spring-boot 包装的快速开发框架（groupId: cn.structured），插件使用指南：https://www.structured.cn/boot/
+​	structure         框架版本 1.4.4      框架说明： structure 是基于 spring-boot 包装的快速开发框架（groupId: cn.structured），插件使用指南：https://www.structured.cn/boot/
 
 源码地址 ： https://github.com/structure-projects/structure-boot.git
 
@@ -305,7 +311,7 @@ resource
 
 ​	hutool           工具版本 5.8.25                       工具类推荐优先使用hutool,主要是工具集完整，尽量减少依赖
 
-​	fastjson         工具版本  1.2.83                      已弃用：Spring Boot 4 默认使用 Jackson，不再使用 fastjson
+​	fastjson         工具版本  1.2.83 / 2.x               JSON 序列化优先使用 FastJSON（禁止混用 Jackson/Gson）
 
 ​	lombok          工具版本 : 1.18.30                   推荐使用 lombok插件减少代码冗余和代码复杂度
 

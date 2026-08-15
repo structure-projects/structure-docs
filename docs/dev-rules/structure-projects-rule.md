@@ -1,5 +1,17 @@
 # structure-projects 项目规范
 
+::: warning 旧版规范，仅作历史参考
+
+本文描述的是**旧版「单体 4 模块 + Manager 模式」**（`api` / `biz` / `common` / `dependencies`）规范。
+当前生态新项目默认采用 **DDD 7+1 多模块**架构，请优先参阅：
+
+- [DDD 架构与模式](./ddd-architecture.md)
+- [项目创建与多模块](./project-scaffolding.md)
+- [编码规范](./coding-conventions.md)
+- [项目结构](./project-structure.md)
+
+:::
+
 ## 项目结构规范
 
 ### 整体架构

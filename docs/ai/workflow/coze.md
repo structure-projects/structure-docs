@@ -20,6 +20,7 @@ Coze（扣子）是字节跳动推出的 AI 机器人搭建平台，提供可视
 
 - **国内版**：[coze.cn](https://www.coze.cn)，基于豆包模型
 - **国际版**：[coze.com](https://www.coze.com)，支持更多模型
+- **开源版**：Coze 于 2025 年 7 月开源（Apache 2.0），核心项目为 [Coze Studio](https://github.com/coze-dev/coze-studio)（可视化 Agent 开发平台）与 [Coze Loop](https://github.com/coze-dev/cozeloop)（智能体运维平台），可 Docker 一键自托管部署
 
 ## 核心概念
 

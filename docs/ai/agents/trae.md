@@ -16,7 +16,7 @@
 
 ## 简介
 
-Trae 是字节跳动推出的 AI 原生集成开发环境（IDE），基于 VS Code 内核深度改造，主打中文自然语言编程与 AI 自动开发。
+Trae 是字节跳动推出的 AI 原生集成开发环境（IDE），基于 VS Code 内核深度改造，主打中文自然语言编程与 AI 自动开发。除了 IDE，Trae 还提供命令行（CLI）版本。
 
 - **国内版**：trae.com.cn，免费，手机号登录，默认豆包模型，可切换 DeepSeek
 - **国际版**：trae.ai，可用 Claude、GPT-4o 等
@@ -28,6 +28,15 @@ Trae 是字节跳动推出的 AI 原生集成开发环境（IDE），基于 VS C
 3. 可一键从 VS Code / Cursor 导入插件、主题、快捷键
 4. 国内版支持手机号验证码登录
 5. 在右侧 AI 面板顶部下拉切换模型（豆包 / DeepSeek-R1 / DeepSeek-V3）
+
+## CLI 版本
+
+Trae 的命令行版本分为两条产品线：
+
+| 版本 | 定位 | 开源 | 说明 |
+|------|------|------|------|
+| **Trae Agent CLI** | 开源的软件工程 Agent | 是（MIT） | [bytedance/trae-agent](https://github.com/bytedance/trae-agent)，Python 编写，基于 LLM 的通用软件工程任务 Agent，支持多模型、MCP、Docker 隔离执行 |
+| **TRAE CLI（traecli）** | 商业命令行工具 | 否 | 火山引擎 / TRAE CN 提供，旗舰版套餐可用，支持 CLI 登录令牌（`TRAECLI_PERSONAL_ACCESS_TOKEN`），适用于 Docker / CI/CD 自动化场景 |
 
 ## 三种协作模式
 

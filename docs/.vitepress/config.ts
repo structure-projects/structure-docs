@@ -57,14 +57,35 @@ export default defineConfig({
         text: '开发规范',
         items: [
           { text: '规范索引', link: '/dev-rules/' },
-          { text: '项目结构', link: '/dev-rules/project-structure' },
+          {
+            text: '通用规范',
+            collapsed: false,
+            items: [
+              { text: 'API 接口规范', link: '/dev-rules/api-design' },
+              { text: '数据模型设计规范', link: '/dev-rules/data-model-design' },
+              { text: '编码与命名规范', link: '/dev-rules/coding-conventions' },
+              { text: '参数校验', link: '/dev-rules/validation' },
+              { text: 'Swagger 规范', link: '/dev-rules/swagger' },
+              { text: 'Git 与开发流程', link: '/dev-rules/git-workflow' },
+            ]
+          },
+          {
+            text: '场景规范',
+            collapsed: false,
+            items: [
+              { text: '项目形态选型与创建', link: '/dev-rules/project-scaffolding' },
+              { text: '单体常规', link: '/dev-rules/monolith-conventional' },
+              { text: '单体 DDD', link: '/dev-rules/monolith-ddd' },
+              { text: '分布式微服务', link: '/dev-rules/distributed-microservice' },
+              { text: '分布式多模块 DDD 7+1', link: '/dev-rules/ddd-architecture' },
+            ]
+          },
+          { text: '项目结构总览', link: '/dev-rules/project-structure' },
           { text: '依赖配置', link: '/dev-rules/dependency-config' },
           { text: 'CRUD 模板', link: '/dev-rules/crud-template' },
           { text: '组件集成', link: '/dev-rules/component-integration' },
-          { text: '参数校验', link: '/dev-rules/validation' },
-          { text: 'Swagger 规范', link: '/dev-rules/swagger' },
           { text: '研发团队指南', link: '/dev-rules/team-guide' },
-          { text: '完整规范（全量）', link: '/dev-rules/structure-projects-rule' },
+          { text: '完整规范（旧版）', link: '/dev-rules/structure-projects-rule' },
         ]
       },
       {

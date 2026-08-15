@@ -12,7 +12,7 @@
 | **Cursor** | Anysphere | IDE | macOS / Windows / Linux | Claude / GPT 等 | 否 | 可视化，Tab 补全 + Composer |
 | **Codex CLI** | OpenAI | CLI | macOS / Linux / Windows | GPT 系列 | 开源 | 沙盒模式，Git 集成 |
 | **Qoder** | 阿里云（通义） | CLI + IDE + JetBrains | macOS / Linux / Windows | Qwen 系列 | 部分开源 | 自定义/本地模型，中文友好 |
-| **Trae** | 字节跳动 | IDE | macOS / Windows | 豆包 / DeepSeek / Claude / GPT | 否 | 免费，Chat / Builder / SOLO 模式 |
+| **Trae** | 字节跳动 | IDE + CLI | macOS / Windows | 豆包 / DeepSeek / Claude / GPT | 部分开源 | 免费，Chat / Builder / SOLO 模式 |
 | **CodeBuddy** | 腾讯 | CLI + IDE + 插件 | macOS / Linux / Windows | 混元 / DeepSeek / Claude 等 | 部分开源 | 腾讯云生态，三位一体 |
 
 ## 通用 Agent 对比
