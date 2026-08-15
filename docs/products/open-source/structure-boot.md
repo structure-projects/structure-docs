@@ -1,5 +1,7 @@
 # Structure Boot 详细文档
 
+> **独立项目**:Structure Boot 是独立的单体启动器项目,独立维护于 [structure-projects/structure-boot](https://github.com/structure-projects/structure-boot),当前最新版本 **1.5.0**。与 Structure Pro(微服务脚手架)采用不同的分层规范,本文档仅介绍 Boot 框架本身。
+
 Structure Boot 是基于 Spring Boot 的快速开发框架，提供一系列开箱即用的 Starter 组件。
 
 ## 一、核心概念
@@ -54,7 +56,7 @@ Structure Boot 遵循以下设计原则：
         <dependency>
             <groupId>cn.structured</groupId>
             <artifactId>structure-boot-parent</artifactId>
-            <version>1.2.3</version>
+            <version>1.5.0</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>

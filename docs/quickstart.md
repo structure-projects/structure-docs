@@ -8,42 +8,17 @@
 
 | 工具 | 版本 | 说明 |
 |------|------|------|
-| JDK | 8+ | Java 开发环境 |
+| JDK | 17+ | Java 开发环境（Structure Boot 1.5.x 要求） |
 | Maven | 3.6+ | 依赖管理工具 |
 | Node.js | 16+ | 前端开发环境（可选） |
 | Docker | 20.10+ | 容器运行环境（可选） |
 
-### 1.2 安装步骤
+### 1.2 环境配置
 
-#### 安装 JDK
+开发环境的具体安装与配置请参考本站环境配置指南：
 
-```bash
-# Ubuntu/Debian
-sudo apt update && sudo apt install openjdk-11-jdk
-
-# CentOS/RHEL
-sudo yum install java-11-openjdk-devel
-
-# 验证
-java -version
-```
-
-#### 安装 Maven
-
-```bash
-# 下载 Maven
-wget https://dlcdn.apache.org/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz
-tar -xzf apache-maven-3.9.6-bin.tar.gz
-mv apache-maven-3.9.6 /opt/maven
-
-# 配置环境变量
-echo 'export MAVEN_HOME=/opt/maven' >> ~/.bashrc
-echo 'export PATH=$MAVEN_HOME/bin:$PATH' >> ~/.bashrc
-source ~/.bashrc
-
-# 验证
-mvn -v
-```
+- **JDK / Maven**：见 [JDK / Maven 环境配置](/dev-env/jdk-maven)，支持 SDKMAN 管理 JDK 17+ 与 Maven 多版本
+- **Node.js**（前端开发，可选）：见 [Node.js 环境](/dev-env/node)
 
 ## 二、创建第一个项目
 
@@ -67,13 +42,6 @@ mvn -v
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.18</version>
-        <relativePath/>
-    </parent>
-
     <groupId>com.example</groupId>
     <artifactId>structure-demo</artifactId>
     <version>1.0.0</version>
@@ -81,12 +49,19 @@ mvn -v
     <description>Structure Boot Demo Application</description>
 
     <properties>
-        <java.version>11</java.version>
-        <structure.version>1.2.3</structure.version>
+        <spring.boot.version>4.0.6</spring.boot.version>
+        <structure.version>1.5.0</structure.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-parent</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>cn.structured</groupId>
                 <artifactId>structure-boot-parent</artifactId>
@@ -123,6 +98,7 @@ mvn -v
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>
             </plugin>
         </plugins>
     </build>
@@ -318,7 +294,7 @@ public class OrderService {
 ### 5.1 创建 Dockerfile
 
 ```dockerfile
-FROM openjdk:11-jre-slim
+FROM openjdk:17-jre-slim
 
 WORKDIR /app
 
@@ -341,8 +317,8 @@ docker run -d -p 8080:8080 --name structure-demo structure-demo:1.0.0
 
 ## 六、下一步
 
-- 📖 阅读 [Structure Boot 详细文档](/structure-boot)
-- 📦 探索更多 [Starter 组件](/products)
-- 🛠️ 了解 [运维工具](/ops-architecture)
+- 📖 阅读 [Structure Boot 详细文档](/products/open-source/structure-boot)
+- 📦 探索更多 [开源产品](/products/open-source/)
+- 🛠️ 了解 [部署与运维](/deploy/)
 
 > 恭喜！您已成功创建并运行了第一个 Structure Boot 应用！
