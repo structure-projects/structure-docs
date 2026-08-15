@@ -1,56 +1,82 @@
 # 项目结构规范
 
-## 1. 整体架构
+Structure 生态内存在**四种项目形态**，开发者需先判断当前项目属于哪种，再套用对应规范：
 
-项目采用标准的微服务分层架构，分为四个模块：
+| 形态 | 模块特征 | 持久化模式 | 规范页 |
+|------|----------|------------|--------|
+| **单体常规** | `api` / `biz` / `common` / `dependencies` 4 模块 | Manager 模式 | [单体常规](./monolith-conventional.md) |
+| **单体 DDD** | 单应用内分层 | 轻量（Manager）或严格（Entity/PO 分离） | [单体 DDD](./monolith-ddd.md) |
+| **分布式微服务** | 每服务单模块或 4 模块 | 按服务内部形态 | [分布式微服务](./distributed-microservice.md) |
+| **分布式多模块 DDD 7+1**（**默认**） | `domain` / `infra` / `repository-mybatis` 等 7+1 模块 | RepositoryFacade + Delegate + Entity/PO 分离 | [分布式多模块 DDD 7+1](./ddd-architecture.md) |
 
-```
-structure-{项目名}/
-├── structure-{项目名}-api/           # 控制层（对外暴露REST API）
-├── structure-{项目名}-biz/           # 业务层（核心业务逻辑）
-├── structure-{项目名}-common/         # 公共层（DTO、VO、枚举、异常等）
-└── structure-{项目名}-dependencies/    # 依赖管理（统一版本控制）
-```
+> 选型决策树与目录布局详见 [项目形态选型与创建](./project-scaffolding.md)。
 
-## 2. 模块职责说明
-
-| 模块 | 职责 | 包含包 |
-|------|------|--------|
-| **structure-{项目名}-api** | 控制层，处理HTTP请求 | `controller/`, `{项目名}Application.java` |
-| **structure-{项目名}-biz** | 业务逻辑层 | `service/`, `manager/`, `mapper/`, `entity/`, `assembler/`, `config/` |
-| **structure-{项目名}-common** | 公共组件 | `dto/`, `vo/`, `query/`, `enums/`, `exception/`, `constant/` |
-| **structure-{项目名}-dependencies** | Maven依赖管理 | `pom.xml` |
-
-## 3. 包结构详解
+## 1. DDD 7+1 模块结构（默认）
 
 ```
-cn.structured.{项目名}/
-├── controller/     # REST API控制层，处理请求和响应
-├── service/       # 业务服务层，定义业务接口和实现
-├── manager/       # 数据管理层，封装数据访问逻辑
-├── mapper/        # MyBatis数据访问层
-├── entity/       # 数据库实体类
-├── assembler/     # 对象装配器（Entity ↔ DTO/VO）
-├── dto/          # 数据传输对象（请求参数）
-├── vo/           # 视图对象（响应数据）
-├── query/        # 查询条件对象
-├── enums/        # 枚举定义（状态码、错误码等）
-├── exception/    # 自定义业务异常
-├── constant/     # 常量定义
-└── config/       # 配置类
+structure-{X}/
+├── structure-{X}-dependencies/        # 父 POM，版本管理（仓库根无 pom.xml）
+├── structure-{X}-common/              # DTO / VO / Query / enums / exception / constant
+├── structure-{X}-domain/              # {X}Entity / {X}Repository 接口 / DomainService
+├── structure-{X}-infra/               # {X}RepositoryImpl / {X}RepositoryDelegate 接口
+├── structure-{X}-repository-mybatis/  # {X}PO / {X}Mapper / {X}MybatisPlusDelegate / Flyway
+├── structure-{X}-application/         # I{X}Service / {X}ServiceImpl / {X}Assembler
+├── structure-{X}-interfaces/          # controller/api/{X}Controller + controller/open/Open{X}Controller
+└── structure-{X}-boot/                # 启动类 + application.yaml + Dockerfile
 ```
+
+### 依赖方向
+
+```
+common → domain → infra → repository-mybatis
+application → domain + infra
+interfaces → application
+boot → all
+```
+
+**禁止**反向依赖和跨层依赖。
+
+::: tip 落地示例
+
+`structure-iam` 中的 `structure-user` / `structure-org` / `structure-tenant` 均采用此结构。以用户中心为例：
+
+```
+structure-user-center/
+├── structure-user/                    # 后端 7+1 模块
+└── structure-user-web/                # 前端容器
+    ├── structure-user-ui/             # wujie 微前端子应用
+    └── structure-user-ui-components/  # 本地组件库
+```
+
+:::
+
+## 2. 单体 4 模块结构（兼容）
+
+```
+structure-{X}/
+├── structure-{X}-api/                 # 控制层（controller/ + 启动类）
+├── structure-{X}-biz/                 # 业务层（service/ + manager/ + mapper/ + entity/ + assembler/ + config/）
+├── structure-{X}-common/              # 公共层（dto/ + vo/ + query/ + enums/ + exception/ + constant/）
+└── structure-{X}-dependencies/        # 父 POM
+```
+
+- 使用 Manager 模式，Entity 直接使用 `@TableId` / `@TableLogic`（不分离 Entity/PO）。
+- **禁止**在单体项目中套用 DDD 的 RepositoryFacade / Delegate 模式。
+- 跨形态通用规则（统一响应、统一异常、命名、validation、swagger、`UserContext`、数据权限、多租户）仍然适用。
+
+## 3. 包名规范
+
+- 根包：`cn.structured.{领域}`（**有 d**）。
+- 子包按层划分：`.common` / `.domain` / `.infra` / `.repository` / `.application` / `.interfaces` / `.boot`。
+- `cn.structure.*`（**无 d**）仅 `structure-common` / `structure-infra` 等底层基础库使用。
 
 ## 4. 枚举规范
-
-### 4.1 枚举命名规范
 
 | 类型 | 命名模式 | 示例 |
 |------|----------|------|
 | 状态枚举 | `{业务}StateEnum` | `ExampleStateEnum` |
 | 类型枚举 | `{业务}TypeEnum` | `ExampleTypeEnum` |
 | 错误码枚举 | `{业务}ExceptionEnum` | `ExampleExceptionEnum` |
-
-### 4.2 枚举类示例
 
 ```java
 @Getter
@@ -67,32 +93,27 @@ public enum ExampleStateEnum {
 
 ## 5. 异常规范
 
-业务异常规范必须使用 `cn.structure.common.exception.CommonException`
+业务异常必须使用 `cn.structure.common.exception.CommonException`：
 
 ```java
-// 推荐抛出CommonException异常，传入枚举类
+// 推荐：传入枚举类
 throw new CommonException(ExampleExceptionEnum.NOT_FOUND.getCode(),
         ExampleExceptionEnum.NOT_FOUND.getMessage());
 
-// 禁止直接使用字面量输出异常信息
+// 禁止：直接使用字面量
 throw new CommonException("100001", "示例不存在"); // 禁止
 ```
 
 ## 6. 响应规范
 
-### 6.1 统一响应
-
 使用 `cn.structure.common.utils.ResultUtilSimpleImpl` 封装响应：
 
 ```java
-// 成功响应
-ResultUtilSimpleImpl.success(data);
-
-// 失败响应
-ResultUtilSimpleImpl.fail(code, message);
+ResultUtilSimpleImpl.success(data);          // 成功
+ResultUtilSimpleImpl.fail(code, message);    // 失败
 ```
 
-### 6.2 响应结构
+统一响应结构：
 
 ```java
 @Data
@@ -113,44 +134,9 @@ public class ResResultVO<T> {
 }
 ```
 
-## 7. 命名规范汇总
+## 7. 相关页面
 
-### 7.1 文件命名
-
-| 类型 | 命名模式 | 示例 |
-|------|----------|------|
-| 枚举类 | `{业务}Enum` | `exampleEnum` |
-| 异常类 | `{业务}Exception` | `exampleException` |
-| 装配器 | `{业务}Assembler` | `exampleAssembler` |
-| 常量类 | `{业务}Constant` | `exampleConstant` |
-| 实体类 | `{业务}` | `example` |
-| DTO类 | `{业务}DTO` | `exampleDTO` |
-| VO类 | `{业务}VO` | `exampleVO` |
-| Query类 | `{业务}Query` | `exampleQuery` |
-| Service接口 | `I{业务}Service` | `IexampleService` |
-| Service实现 | `{业务}ServiceImpl` | `exampleServiceImpl` |
-| Manager接口 | `I{业务}Manager` | `IexampleManager` |
-| Manager实现 | `{业务}ManagerImpl` | `exampleManagerImpl` |
-| Controller | `{业务}Controller` | `exampleController` |
-| Mapper | `{业务}Mapper` | `exampleMapper` |
-
-### 7.2 包名规范
-
-| 包名 | 说明 |
-|------|------|
-| `controller` | REST API控制器 |
-| `service` | 业务服务接口 |
-| `service.impl` | 业务服务实现 |
-| `manager` | 数据管理层接口 |
-| `manager.impl` | 数据管理层实现 |
-| `mapper` | MyBatis Mapper接口 |
-| `entity` | 数据库实体类 |
-| `dto` | 数据传输对象（请求） |
-| `vo` | 视图对象（响应） |
-| `query` | 查询条件对象 |
-| `enums` | 枚举定义 |
-| `exception` | 自定义异常 |
-| `constant` | 常量定义 |
-| `config` | 配置类 |
-| `assembler` | 对象装配器 |
-
+- 项目选型与目录布局：[项目形态选型与创建](./project-scaffolding.md)
+- 编码约束：[编码与命名规范](./coding-conventions.md)
+- 接口出入参：[API 接口规范](./api-design.md)
+- 依赖配置：[依赖配置](./dependency-config.md)
