@@ -117,32 +117,6 @@ export OPENAI_BASE_URL="https://ark.cn-beijing.volces.com/api/v3"
 export OPENAI_API_KEY="YOUR_ARK_API_KEY"
 ```
 
-## Claude Code 接入
-
-方舟提供 Anthropic Messages 兼容端点，可直接接入 Claude Code：
-
-```bash
-export ANTHROPIC_BASE_URL="https://ark.cn-beijing.volces.com/api/coding"
-export ANTHROPIC_AUTH_TOKEN="YOUR_ARK_API_KEY"
-export ANTHROPIC_MODEL="ark-code-latest"
-```
-
-或写入配置文件：
-
-```json
-// ~/.claude/settings.json
-{
-  "env": {
-    "ANTHROPIC_AUTH_TOKEN": "YOUR_ARK_API_KEY",
-    "ANTHROPIC_BASE_URL": "https://ark.cn-beijing.volces.com/api/coding",
-    "ANTHROPIC_MODEL": "ark-code-latest",
-    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "ark-code-latest",
-    "ANTHROPIC_DEFAULT_SONNET_MODEL": "ark-code-latest",
-    "ANTHROPIC_DEFAULT_OPUS_MODEL": "ark-code-latest"
-  }
-}
-```
-
 ## 参考资源
 
 - [火山方舟控制台](https://console.volcengine.com/ark)
