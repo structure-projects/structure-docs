@@ -17,16 +17,28 @@ Coding Plan（编程套餐）是各大云平台推出的 AI 编码订阅服务�
 | [阿里云百炼](aliyun-bailian) | Token Plan 团队版 | Credits | 同上 | 团队协作，多席位管理 |
 | [腾讯云 TokenHub](tencent) | Coding Plan | 请求次数 | tc-code-latest (Auto)、Kimi-K2.5、GLM-5 | 腾讯云生态，CodeBuddy 深度集成 |
 | [智谱 GLM](zhipu-glm) | Coding Plan | 积分 | GLM-5.3、GLM-5-Turbo、GLM-4.7 | 智谱 GLM 生态，ZCode 深度集成 |
-| [火山引擎方舟](volcengine-ark) | Coding Plan / 方舟推理（按量） | Token | 豆包系列模型 | 字节跳动生态，TRAE 用户 |
+| [火山引擎方舟](volcengine-ark) | Coding Plan | Token | 豆包系列（`ark-code-latest`） | 字节跳动生态，当前较易购买 |
 
 ## 协议兼容
 
-Coding Plan 普遍支持两种协议接入：
+**四个平台均同时提供 Anthropic Messages 与 OpenAI 兼容端点**，因此任意支持自定义 Base URL 的编码工具都能接入：
 
 | 协议 | 适用工具 | 说明 |
 |------|----------|------|
 | Anthropic Messages API | Claude Code、Cline、Kilo Code、OpenCode 等 | 配置 `ANTHROPIC_BASE_URL` 指向兼容端点 |
-| OpenAI Chat Completions API | Codex、Kilo Code、OpenCode、Cline 等 | 配置 `BASE_URL` 指向 OpenAI 兼容端点 |
+| OpenAI Chat Completions API | Codex、Kilo Code、OpenCode、Cline、CodeBuddy 等 | 配置 `BASE_URL` 指向 OpenAI 兼容端点 |
+
+### Anthropic 端点速查
+
+| 平台 | Anthropic Base URL | 推荐模型 |
+|------|--------------------|----------|
+| 阿里云百炼 Coding Plan | `https://coding.dashscope.aliyuncs.com/apps/anthropic` | `qwen3.7-plus` |
+| 阿里云百炼 Token Plan | `https://token-plan.cn-beijing.maas.aliyuncs.com/apps/anthropic` | `qwen3.8-max` |
+| 腾讯云 TokenHub | `https://api.lkeap.cloud.tencent.com/coding/anthropic` | `tc-code-latest` |
+| 智谱 GLM（BigModel） | `https://open.bigmodel.cn/api/anthropic` | `glm-5.3` |
+| 火山引擎方舟 | `https://ark.cn-beijing.volces.com/api/coding` | `ark-code-latest` |
+
+> 各平台均提供 `xxx-code-latest` / `Auto` 类的聚合模型标识，会自动匹配当前最优编码模型，通常优于手动指定具体版本。
 
 ## 选购建议
 
