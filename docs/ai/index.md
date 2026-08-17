@@ -6,7 +6,8 @@
 
 | 分类 | 说明 | 入口 |
 |------|------|------|
-| **AI 编程 Agent** | Claude Code、Cursor、Codex、Qoder、Trae、CodeBuddy 等编程 Agent，以及 OpenClaw、Hermes、OpenHands 等通用 Agent | [agents/](/ai/agents/) |
+| **AI 编程 Agent** | Claude Code、Cursor、Codex、Qoder、Trae、CodeBuddy、OpenCode、Cline、Kilo Code、ZCode 等编程 Agent，以及 OpenClaw、Hermes、OpenHands 等通用 Agent | [agents/](/ai/agents/) |
+| **Coding Plan 套餐集成** | 阿里百炼、腾讯 TokenHub、智谱 GLM、火山方舟的 Coding Plan / Token Plan 订阅接入配置 | [coding-plan/](/ai/coding-plan/) |
 | **工作流平台** | Dify、Coze、n8n 等可视化工作流编排平台 | [workflow/](/ai/workflow/) |
 | **LLM 私有化部署** | 基于 GPUStack 的 LLM 私有化部署（vLLM / llama.cpp 后端、量化、厂商模型、Agent 集成） | [llm/](/ai/llm/) |
 
@@ -25,8 +26,9 @@
 | 深度 Agent 化开发、复杂重构 | Claude Code |
 | 可视化日常开发 | Cursor |
 | 国内网络、阿里云/通义生态 | Qoder |
+| 国内订阅套餐降低成本 | 阿里百炼 / 腾讯 / 智谱 Coding Plan |
 | 自托管 LLM 应用、知识库问答 | Dify |
 | 跨系统数据集成、API 编排 | n8n |
 | 私有化部署大模型 | GPUStack + vLLM |
 
-> 完整的 Agent 对比与选型建议见 [AI 编程 Agent 使用指南](/ai/agents/)。
+> 完整的 Agent 对比与选型建议见 [AI 编程 Agent 使用指南](/ai/agents/)，套餐额度与端点对比见 [Coding Plan 套餐集成](/ai/coding-plan/)。

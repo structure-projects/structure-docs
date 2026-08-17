@@ -71,7 +71,7 @@ codebuddy --version
 
 ## 配置模型
 
-如需配置腾讯云 Token Plan 模型，编辑配置文件：
+如需配置腾讯云 Coding Plan 模型，编辑配置文件：
 
 - **Windows**：`C:\Users\<用户名>\.codebuddy\models.json`
 - **macOS / Linux**：`~/.codebuddy/models.json`
@@ -82,18 +82,25 @@ codebuddy --version
     {
       "id": "tc-code-latest",
       "name": "Auto",
-      "vendor": "Tencent Cloud 通用 Token Plan",
-      "apiKey": "$your_api_key",
-      "url": "https://api.lkeap.cloud.tencent.com/plan/v3"
+      "vendor": "Tencent Cloud Coding Plan",
+      "apiKey": "YOUR_CODING_PLAN_API_KEY",
+      "url": "https://api.lkeap.cloud.tencent.com/coding/v3"
     }
   ]
 }
 ```
 
-- 国内站 API：`https://api.lkeap.cloud.tencent.com/plan/v3`
-- 国际站 API：`https://tokenhub-intl.tencentcloudmaas.com/plan/v3`
+支持的模型：
 
-配置后启动，输入 `/model` 选择配置的模型。
+| 模型 | `id` 取值 |
+|------|-----------|
+| Auto（推荐） | `tc-code-latest` |
+| Kimi-K2.5 | `kimi-k2.5` / `kimi-k-2-5` |
+| GLM-5 | `glm-5` / `glm-5-0` |
+
+> **注意**：旧版文档中的 `https://api.lkeap.cloud.tencent.com/plan/v3` 已更新为 `/coding/v3`，请使用新版地址。Coding Plan API Key 格式为 `sk-sp-xxxx`，与按量付费 Key（`sk-xxxx`）不互通。
+
+配置后启动，输入 `/model` 选择配置的模型。套餐档位与额度详见 [腾讯云 TokenHub Coding Plan](/ai/coding-plan/tencent)。
 
 ## 基本使用
 
@@ -143,5 +150,5 @@ codebuddy -p "优化这个 SQL 查询的性能"
 
 ## 参考资源
 
-- [CodeBuddy CLI 快速入门](https://www.codebuddy.ai/docs/zh/cli/quickstart)
-- [腾讯云 Token Plan 配置](https://cloud.tencent.cn/document/product/1823/130068)
+- [CodeBuddy CLI 快速入门](https://www.codebuddy.cn/docs/cli/overview)
+- [腾讯云 Coding Plan 文档](https://cloud.tencent.com/document/product/1823/130092)
