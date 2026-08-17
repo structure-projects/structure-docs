@@ -3,6 +3,7 @@
 ## 目录
 - [简介](#简介)
 - [安装与配置](#安装与配置)
+- [CLI 版本](#cli-版本)
 - [三种协作模式](#三种协作模式)
   - [Chat 模式](#chat-模式)
   - [Builder 模式](#builder-模式)
@@ -36,7 +37,59 @@ Trae 的命令行版本分为两条产品线：
 | 版本 | 定位 | 开源 | 说明 |
 |------|------|------|------|
 | **Trae Agent CLI** | 开源的软件工程 Agent | 是（MIT） | [bytedance/trae-agent](https://github.com/bytedance/trae-agent)，Python 编写，基于 LLM 的通用软件工程任务 Agent，支持多模型、MCP、Docker 隔离执行 |
-| **TRAE CLI（traecli）** | 商业命令行工具 | 否 | 火山引擎 / TRAE CN 提供，旗舰版套餐可用，支持 CLI 登录令牌（`TRAECLI_PERSONAL_ACCESS_TOKEN`），适用于 Docker / CI/CD 自动化场景 |
+| **TraeCode CLI（traecli）** | 商业命令行 Code Agent | 否 | 仅 TRAE 企业版**旗舰版套餐**客户可用，支持 MCP、自定义智能体、技能、记忆、ACP |
+
+### TraeCode CLI 2.0
+
+支持 macOS、Linux、Windows。Windows 建议优先使用 WSL2；使用原生版本时，首次启动需按提示完成沙箱初始化。
+
+**安装**
+
+```bash
+# macOS / Linux
+sh -c "$(curl -fsSL https://trae.cn/trae-cli/install_v2.sh)"
+```
+
+```powershell
+# Windows (PowerShell)
+irm https://trae.cn/trae-cli/install_v2.ps1 | iex
+```
+
+**启动**
+
+```bash
+traecli                                  # 在当前目录启动交互式 TUI
+traecli --cd /path/to/project            # 指定工作目录
+traecli "解释这个仓库的主要模块"           # 启动 TUI 并带入首条任务
+```
+
+> 首次进入项目目录时 CLI 会询问是否信任该目录。**信任后**项目级配置、规则和 Hooks 才会生效。
+
+**登录**
+
+首次启动会在 TUI 内自动引导登录，支持账号登录与自定义域登录。
+
+```bash
+traecli login status      # 查看登录状态
+traecli logout            # 退出登录
+```
+
+自动化 / CI 场景使用个人访问令牌（PAT）：
+
+```bash
+export TRAECLI_PERSONAL_ACCESS_TOKEN="YOUR_PAT"
+traecli login --with-trae-pat
+```
+
+组织使用自定义 API 域名时追加 `TRAECLI_HOST`：
+
+```bash
+export TRAECLI_HOST="https://api.example.com"
+export TRAECLI_PERSONAL_ACCESS_TOKEN="YOUR_PAT"
+traecli login --with-trae-pat
+```
+
+> **注意**：TraeCode CLI 默认使用 **Max 模式**，需关注套餐用量。
 
 ## 三种协作模式
 
@@ -130,3 +183,5 @@ Builder 模式右上角 **Show History** 查看每轮修改快照，一键回退
 
 - [Trae 国内版](https://trae.com.cn)
 - [Trae 国际版](https://trae.ai)
+- [TraeCode CLI 文档](https://docs.trae.cn/cli_what-is-trae-cli)
+- [TraeCode CLI 2.0 快速开始](https://docs.trae.cn/cli_get-started-with-trae-code-cli-2)

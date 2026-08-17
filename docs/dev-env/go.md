@@ -14,6 +14,7 @@
   - [gvm (Go Version Manager)](#gvm-go-version-manager)
   - [goenv](#goenv)
   - [GOTOOLCHAIN (内置工具链管理)](#gotoolchain-内置工具链管理)
+  - [方案选择建议](#方案选择建议)
 - [依赖管理 (Go Modules)](#依赖管理-go-modules)
 - [GOPROXY 配置](#goproxy-配置)
 - [常用命令](#常用命令)
@@ -26,9 +27,32 @@ Go（又称 Golang）是由 Google 开发的开源编程语言。安装 Go 后�
 
 ## Go 安装
 
+> **推荐**：macOS / Linux 优先使用 [gvm](/dev-env/go-gvm) 安装并管理 Go 版本，后续升级或多版本共存都不需要重装、改 PATH。Windows 原生环境不支持 gvm，请使用 MSI 安装包或包管理器。
+
 ### macOS
 
-#### 方式一：使用 Homebrew (推荐)
+#### 方式一：使用 gvm (推荐)
+```bash
+# 安装编译依赖
+xcode-select --install
+brew install mercurial
+
+# 安装 gvm
+bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+echo '[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"' >> ~/.zshrc
+source ~/.zshrc
+
+# 安装 Go 并设为默认版本
+gvm install go1.22.0 -B
+gvm use go1.22.0 --default
+
+# 验证安装
+go version
+```
+
+> 详细用法（多版本切换、pkgset 隔离、常见问题）见 [gvm 版本管理指南](/dev-env/go-gvm)。
+
+#### 方式二：使用 Homebrew
 ```bash
 # 安装 Homebrew (如果未安装)
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -43,7 +67,7 @@ brew install go@1.22
 go version
 ```
 
-#### 方式二：官方安装包
+#### 方式三：官方安装包
 1. 访问 [Go 官网](https://go.dev/dl/) 下载 `.pkg` 安装包
 2. 双击运行安装程序，按提示完成安装
 3. 验证安装
@@ -53,7 +77,30 @@ go version
 
 ### Linux
 
-#### 方式一：使用官方二进制包 (推荐)
+#### 方式一：使用 gvm (推荐)
+```bash
+# 安装编译依赖 (Debian/Ubuntu)
+sudo apt-get update
+sudo apt-get install -y curl git mercurial make binutils bison gcc build-essential
+
+# CentOS/RHEL: sudo yum install -y curl git make bison gcc glibc-devel
+
+# 安装 gvm
+bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+echo '[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"' >> ~/.bashrc
+source ~/.bashrc
+
+# 安装 Go 并设为默认版本
+gvm install go1.22.0 -B
+gvm use go1.22.0 --default
+
+# 验证安装
+go version
+```
+
+> 详细用法见 [gvm 版本管理指南](/dev-env/go-gvm)。
+
+#### 方式二：使用官方二进制包
 ```bash
 # 下载最新版本 (以 1.22.x 为例，请替换为实际版本号)
 wget https://go.dev/dl/go1.22.0.linux-amd64.tar.gz
@@ -71,7 +118,7 @@ source ~/.bashrc
 go version
 ```
 
-#### 方式二：使用包管理器
+#### 方式三：使用包管理器
 ```bash
 # Ubuntu/Debian
 sudo apt update
@@ -82,6 +129,8 @@ sudo yum install -y golang
 ```
 
 ### Windows
+
+> gvm 不支持原生 Windows（PowerShell/CMD）。需要多版本管理时，可在 WSL2 中按 Linux 方式安装 gvm，或使用 [goenv](#goenv) / [GOTOOLCHAIN](#gotoolchain-内置工具链管理)。
 
 #### 方式一：官方 MSI 安装包
 1. 访问 [Go 官网](https://go.dev/dl/) 下载 Windows `.msi` 安装包
@@ -121,6 +170,8 @@ go version
 ## 环境变量配置
 
 Go 开发主要涉及三个环境变量：
+
+> 使用 gvm 管理 Go 时，`GOROOT`、`GOPATH`、`PATH` 由 gvm 在切换版本时自动设置，**不要**在 `~/.zshrc` / `~/.bashrc` 中再手工写死 `export GOROOT=...`，否则切换版本不会生效。详见 [gvm 与环境变量](/dev-env/go-gvm#gvm-与环境变量)。
 
 ### GOROOT
 - Go 的安装目录，包含 Go 编译器和标准库
@@ -175,7 +226,7 @@ go env GOPROXY
 
 ### gvm (Go Version Manager)
 
-支持 macOS 和 Linux（Windows 需在 WSL 或 Git Bash 下使用）。
+Structure 生态推荐的 Go 版本管理方案，支持 macOS 和 Linux（Windows 需在 WSL2 下使用），除多版本切换外还提供 pkgset 依赖目录隔离。
 
 ```bash
 # 安装 gvm
@@ -185,18 +236,20 @@ bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/bins
 echo '[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"' >> ~/.zshrc
 source ~/.zshrc
 
-# 安装指定 Go 版本
-gvm install go1.22.0
+# 列出可安装版本
+gvm listall
+
+# 安装指定 Go 版本 (-B 使用官方预编译包，无需本地编译)
+gvm install go1.22.0 -B
 
 # 切换到指定版本 (作为默认版本)
 gvm use go1.22.0 --default
 
 # 列出已安装版本
 gvm list
-
-# 列出可安装版本
-gvm listall
 ```
+
+> 完整说明（前置依赖、源码编译引导、pkgset 隔离、升级卸载、常见问题排查）见 **[gvm 版本管理指南](/dev-env/go-gvm)**。
 
 ### goenv
 
@@ -243,6 +296,17 @@ go env -w GOTOOLCHAIN=local
 # 在 go.mod 中指定最低工具链版本
 # go 1.22.0
 ```
+
+### 方案选择建议
+
+| 场景 | 推荐方案 |
+|------|---------|
+| macOS / Linux 日常开发，需在多个 Go 版本间切换 | [gvm](/dev-env/go-gvm) |
+| 需要目录级自动切换版本 | goenv |
+| Go 1.21+ 且只需跟随各项目 `go.mod` 声明的版本 | GOTOOLCHAIN=auto |
+| Windows 原生环境 | MSI 安装包 + GOTOOLCHAIN，或 WSL2 + gvm |
+
+> gvm 与 GOTOOLCHAIN 可以配合使用：gvm 提供基础版本，`GOTOOLCHAIN=auto` 让 Go 按各项目 `go.mod` 自动对齐工具链。
 
 ---
 

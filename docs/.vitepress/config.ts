@@ -93,6 +93,7 @@ export default defineConfig({
         items: [
           { text: '环境总览', link: '/dev-env/' },
           { text: 'Go 环境', link: '/dev-env/go' },
+          { text: 'gvm 详解', link: '/dev-env/go-gvm' },
           { text: 'Node.js 环境', link: '/dev-env/node' },
           { text: 'JDK / Maven', link: '/dev-env/jdk-maven' },
           { text: 'Python 环境', link: '/dev-env/python' },
@@ -104,6 +105,44 @@ export default defineConfig({
         items: [
           { text: 'AI 工具总览', link: '/ai/' },
           { text: 'AI 编程 Agent', link: '/ai/agents/' },
+          {
+            text: '编程 Agent',
+            collapsed: true,
+            items: [
+              { text: 'CLI 通用方法论', link: '/ai/agents/cli-methodology' },
+              { text: 'Claude Code', link: '/ai/agents/claude-code' },
+              { text: 'Cursor', link: '/ai/agents/cursor' },
+              { text: 'Codex CLI', link: '/ai/agents/codex' },
+              { text: 'Qoder', link: '/ai/agents/qoder' },
+              { text: 'Trae', link: '/ai/agents/trae' },
+              { text: 'CodeBuddy', link: '/ai/agents/codebuddy' },
+              { text: 'OpenCode', link: '/ai/agents/opencode' },
+              { text: 'Cline', link: '/ai/agents/cline' },
+              { text: 'Kilo Code', link: '/ai/agents/kilo-code' },
+              { text: 'ZCode', link: '/ai/agents/zcode' },
+            ]
+          },
+          {
+            text: '通用 Agent',
+            collapsed: true,
+            items: [
+              { text: 'OpenClaw', link: '/ai/agents/openclaw' },
+              { text: 'Hermes', link: '/ai/agents/hermes' },
+              { text: 'OpenHands', link: '/ai/agents/openhands' },
+              { text: 'Agent 自动化总结', link: '/ai/agents/automation-summary' },
+            ]
+          },
+          {
+            text: 'Coding Plan 套餐',
+            collapsed: false,
+            items: [
+              { text: '套餐集成总览', link: '/ai/coding-plan/' },
+              { text: '阿里云百炼', link: '/ai/coding-plan/aliyun-bailian' },
+              { text: '腾讯云 TokenHub', link: '/ai/coding-plan/tencent' },
+              { text: '智谱 GLM', link: '/ai/coding-plan/zhipu-glm' },
+              { text: '火山引擎方舟', link: '/ai/coding-plan/volcengine-ark' },
+            ]
+          },
           { text: '工作流平台', link: '/ai/workflow/' },
           { text: 'LLM 私有化部署', link: '/ai/llm/' },
         ]

@@ -36,12 +36,12 @@ Structure 社区的产品分为两类，详见 [产品中心](/products/)：
 <div style="display:flex; gap:3rem; align-items:flex-start; flex-wrap:wrap;">
   <div style="text-align:center;">
     <p><strong>QQ 技术交流群</strong></p>
-    <img src="/images/qq-group.png" alt="QQ 技术交流群二维码" width="240" />
+    <img src="/images/qq-group.png" alt="QQ 技术交流群二维码" width="240" height="240" style="width:240px; height:240px; object-fit:contain; background:#fff;" />
     <p>扫码申请加入</p>
   </div>
   <div style="text-align:center;">
     <p><strong>钉钉技术交流群</strong></p>
-    <img src="/images/dingtalk-group.png" alt="钉钉技术交流群二维码" width="240" />
+    <img src="/images/dingtalk-group.png" alt="钉钉技术交流群二维码" width="240" height="240" style="width:240px; height:240px; object-fit:contain; background:#fff;" />
     <p>群号：182090000946</p>
   </div>
 </div>

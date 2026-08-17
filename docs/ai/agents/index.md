@@ -14,6 +14,10 @@
 | **Qoder** | 阿里云（通义） | CLI + IDE + JetBrains | macOS / Linux / Windows | Qwen 系列 | 部分开源 | 自定义/本地模型，中文友好 |
 | **Trae** | 字节跳动 | IDE + CLI | macOS / Windows | 豆包 / DeepSeek / Claude / GPT | 部分开源 | 免费，Chat / Builder / SOLO 模式 |
 | **CodeBuddy** | 腾讯 | CLI + IDE + 插件 | macOS / Linux / Windows | 混元 / DeepSeek / Claude 等 | 部分开源 | 腾讯云生态，三位一体 |
+| **OpenCode** | Anomaly | CLI/TUI + 桌面 + 插件 | macOS / Linux / Windows(WSL) | 供应商中立 | 开源 | 数百种模型，任意 OpenAI/Anthropic 端点 |
+| **Cline** | Cline | IDE 扩展 + CLI + SDK | macOS / Linux / Windows | 30+ 供应商 | 开源 | Plan & Act 双模式，审批机制完善 |
+| **Kilo Code** | Kilo | CLI + IDE 扩展 | macOS / Linux / Windows | 供应商中立 | 开源 | OpenCode Fork，Architect/Code/Debug 模式 |
+| **ZCode** | 智谱 AI | 桌面 ADE | macOS / Windows / Linux | GLM 系列 | 否 | 多任务并行、闲时任务调度 |
 
 ## 通用 Agent 对比
 
@@ -36,12 +40,18 @@ agents/
 ├── qoder.md               # Qoder CLI 教程
 ├── trae.md                # Trae IDE 教程
 ├── codebuddy.md           # CodeBuddy Code CLI 教程
+├── opencode.md            # OpenCode 教程
+├── cline.md               # Cline 教程
+├── kilo-code.md           # Kilo CLI / Kilo Code 教程
+├── zcode.md               # ZCode 桌面 ADE 教程
 ├── openclaw.md            # OpenClaw（小龙虾）教程
 ├── hermes.md              # Hermes Agent（爱马仕）教程
 └── openhands.md           # OpenHands 教程
 ```
 
 工作流平台（Dify / Coze / n8n）文档见独立的 [`workflow/`](../workflow/index.md) 目录。
+
+国内云平台的 Coding Plan / Token Plan 订阅接入配置见 [`coding-plan/`](../coding-plan/index.md) 目录。
 
 ## 选型建议
 
@@ -53,6 +63,9 @@ agents/
 | 国内网络、阿里云/通义生态 | Qoder | 基于 Qwen，支持百炼/魔搭 API |
 | 免费、可视化 IDE、快速原型 | Trae | 免费，Builder/SOLO 模式 |
 | 腾讯云生态、企业私有化 | CodeBuddy | 腾讯云三位一体 |
+| 自由切换任意模型供应商 | OpenCode / Kilo CLI | 供应商中立，可接入任意 OpenAI/Anthropic 端点 |
+| 需要严格审批、先规划后执行 | Cline | Plan & Act 双模式，逐步审批 |
+| GLM 套餐用户、图形化操作 | ZCode | 深度集成 GLM，支持闲时任务降低消耗 |
 | 系统级自动化、跨平台消息 | OpenClaw | 50+ 渠道，本地优先 |
 | 长期记忆、经验沉淀 | Hermes | 持久记忆 + 自我进化技能 |
 | 自主修 bug、生成 PR | OpenHands | 自主软件工程智能体 |
@@ -76,7 +89,12 @@ agents/
 - [Qoder 教程](qoder.md) — Qwen 生态 CLI 编码 Agent
 - [Trae 教程](trae.md) — 字节跳动 AI IDE
 - [CodeBuddy 教程](codebuddy.md) — 腾讯 AI 编程助手
+- [OpenCode 教程](opencode.md) — 供应商中立的开源编码 Agent
+- [Cline 教程](cline.md) — Plan & Act 双模式，IDE 扩展 / CLI / SDK
+- [Kilo Code 教程](kilo-code.md) — Kilo CLI 与 VS Code 扩展
+- [ZCode 教程](zcode.md) — 智谱 GLM 桌面 ADE
 - [OpenClaw 教程](openclaw.md) — 通用 Agent（小龙虾）
 - [Hermes 教程](hermes.md) — 通用 Agent（爱马仕）
 - [OpenHands 教程](openhands.md) — 自主软件工程 Agent
 - [工作流平台](../workflow/index.md) — Dify / Coze / n8n
+- [Coding Plan 套餐集成](../coding-plan/index.md) — 阿里百炼 / 腾讯 / 智谱 / 火山方舟
